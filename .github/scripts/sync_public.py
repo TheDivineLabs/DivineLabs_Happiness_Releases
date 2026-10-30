@@ -55,8 +55,8 @@ def hero(version):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420">
 <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#111629"/><stop offset="1" stop-color="#20193e"/></linearGradient><linearGradient id="accent" x2="1" y2="1"><stop stop-color="#ba9cff"/><stop offset="1" stop-color="#7761ff"/></linearGradient><linearGradient id="window" x2="0" y2="1"><stop stop-color="#302a50"/><stop offset="1" stop-color="#181b30"/></linearGradient></defs>
 <rect width="1280" height="420" rx="24" fill="url(#bg)"/><circle cx="1090" cy="210" r="300" fill="none" stroke="#403362" stroke-width="1"/><circle cx="1090" cy="210" r="230" fill="none" stroke="#403362"/><circle cx="1090" cy="210" r="165" fill="none" stroke="#4a3d71"/>
-<g font-family="Segoe UI,Inter,Arial,sans-serif"><text x="64" y="75" fill="#b5a2ee" font-size="16" letter-spacing="5">DIVINELABS / MUSICWARS</text><text x="60" y="174" fill="#faf8ff" font-size="82" font-weight="700" letter-spacing="-2">Happiness</text><text x="65" y="225" fill="#c4c4db" font-size="23">Твоя игра. Удобное окно. Всё под рукой.</text>
-<rect x="64" y="276" width="150" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="89" y="301" fill="#ece5ff" font-size="15">Windows x64</text><rect x="226" y="276" width="160" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="247" y="301" fill="#ece5ff" font-size="15">Preview {v}</text><text x="65" y="367" fill="#8e90aa" font-size="15">CLIENT  ·  PLUS В ПОДГОТОВКЕ</text></g>
+<g font-family="Segoe UI,Inter,Arial,sans-serif"><text x="64" y="75" fill="#b5a2ee" font-size="16" letter-spacing="5">DIVINELABS / MUSICWARS</text><text x="60" y="174" fill="#faf8ff" font-size="82" font-weight="700" letter-spacing="-2">Happiness</text><text x="65" y="225" fill="#c4c4db" font-size="23">Клиент MusicWars для Windows.</text>
+<rect x="64" y="276" width="150" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="89" y="301" fill="#ece5ff" font-size="15">Windows x64</text><rect x="226" y="276" width="160" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="247" y="301" fill="#ece5ff" font-size="15">Preview {v}</text><text x="65" y="367" fill="#8e90aa" font-size="15">УСТАНОВЩИК EXE  ·  PORTABLE ZIP</text></g>
 <g transform="translate(826 77)"><rect x="12" y="20" width="360" height="252" rx="22" fill="#0b1020" opacity=".35"/><rect width="360" height="252" rx="22" fill="url(#window)" stroke="#6b5a96"/><path d="M0 49h360" stroke="#55456f"/><circle cx="25" cy="25" r="5" fill="#b6a2e8"/><circle cx="43" cy="25" r="5" fill="#8f7fbb"/><circle cx="61" cy="25" r="5" fill="#665c89"/><rect x="24" y="74" width="312" height="144" rx="13" fill="#151a2c" stroke="#38324c"/>
 <g transform="translate(127 82) scale(.72)"><rect width="144" height="144" rx="34" fill="url(#accent)"/><path d="M28 38C28 22 40 16 54 16H64C82 16 96 26 104 42H50C41 42 33 47 28 54ZM28 66C28 54 40 48 52 48H106C109 58 109 67 106 78H50C41 78 33 83 28 91ZM28 102C28 90 40 84 52 84H103C95 102 79 114 61 114H49C40 114 33 119 28 124Z" transform="translate(8 -2)" fill="white"/></g>
 <rect x="240" y="192" width="102" height="85" rx="13" fill="#24223b" stroke="#8872b6"/><rect x="255" y="208" width="71" height="9" rx="4" fill="#9b83d8"/><rect x="255" y="228" width="48" height="7" rx="3" fill="#625574"/><rect x="255" y="245" width="61" height="7" rx="3" fill="#625574"/></g></svg>
@@ -124,7 +124,7 @@ def render(root, out, fetch=False):
 
 # DivineLabs Happiness
 
-Клиент MusicWars от DivineLabs. Адаптивное игровое окно, темы оформления и управление, которое появляется по нажатию на плавающий логотип.
+Клиент MusicWars для Windows. Доступен в виде установщика и portable-архива.
 
 **[Скачать](#скачать)** · **[Что нового](NEWS.md)** · **[Начало работы](docs/getting-started.md)** · **[Поддержка](#поддержка)**
 
@@ -134,15 +134,15 @@ def render(root, out, fetch=False):
 
 Предварительная версия. Полная игровая проверка ещё не завершена.
 
-## Твоя игра, удобнее
+## Возможности
 
-| Окно под твой экран | Управление под рукой |
-| --- | --- |
-| Размер страницы подстраивается под окно. Есть полноэкранный режим и бинды. | Перемещаемый логотип DivineLabs открывает боковую панель с нужными действиями. |
-| **Темы оформления** | **Снимок только игры** |
-| Orbit, Signal, Paper и Control: выбери подходящее оформление оболочки. | Скриншоты сохраняются без наших плавающих элементов поверх игры. |
-| **Системный трей** | **Локальные замеры** |
-| Окно можно убрать с панели задач и вернуть из трея. | Отдельная кнопка записывает технические показатели для разбора просадок. |
+- Адаптивное окно игры, полноэкранный режим и горячие клавиши.
+- Боковая панель по нажатию на перемещаемый логотип DivineLabs.
+- Четыре темы: Orbit, Signal, Paper и Control.
+- Скриншоты игры без элементов оболочки.
+- Сворачивание в системный трей.
+- Локальная запись технических показателей.
+- Открытие ссылок из писем внутри клиента.
 
 ## Client и Plus
 
@@ -153,13 +153,13 @@ def render(root, out, fetch=False):
 | Основной EXE · {comparison_version} | {exe:.2f} МиБ | {plus:.2f} МиБ |
 | Публичный канал | {"Доступен" if client else "Подготавливается"} | После запуска подписок |
 
-Plus пока в подготовке. Покупка подписки и публичная загрузка Plus ещё не открыты. Платёжных ссылок и обещанной даты запуска пока нет.
+Plus пока не опубликован. Подписки ещё не запущены.
 
 ## Производительность
 
-**Client не содержит дополнительные модули Plus.** Его основной EXE занимает около **{exe:.2f} МиБ**. Это размер файла на диске; общие игровые компоненты поставляются отдельно.
+Основной EXE Client занимает **{exe:.2f} МиБ**. Компоненты CEF/Flash входят в установщик и portable отдельно от EXE.
 
-Сравнение FPS, CPU и памяти с обычным браузером пока не опубликовано. Мы не обещаем проценты ускорения без одинаковых условий и повторяемых замеров. [Что уже измерено и что ещё проверяется](docs/performance.md).
+Сравнительных замеров FPS, CPU и памяти пока нет. [Сведения о размерах и замерах](docs/performance.md).
 
 ## Сейчас в проекте
 
@@ -189,11 +189,11 @@ Happiness распространяется на [закрытых условия
 3. Для portable распакуйте архив целиком и запускайте DivineLabs.Happiness.exe из корня.
 4. Настройки и профили находятся в Data. Установка и удаление используют фирменный мастер DivineLabs.
 
-Для технической части входа через VK нужен Microsoft Edge WebView2 Runtime. Полный цикл входа в новой оболочке ещё требует пользовательской проверки. Звук выключен.
+Для входа через ВК нужен установленный Microsoft Edge WebView2 Runtime. Вход в Client проверен владельцем. Звук выключен.
 
 По умолчанию удаление сохраняет данные. Полное удаление выбирается отдельно. Обновление и удаление 0.2.8 проверены на отдельных тестовых установках.
 
-Текущая версия предварительная: некоторые игровые сценарии и длительная работа ещё проверяются. Plus появится отдельным каналом после запуска подписок.
+Версия предварительная. При ошибке укажите версию приложения и шаги повторения в Issues или Discord.
 """)
     put("docs/performance.md", f"""# Производительность и замеры
 
