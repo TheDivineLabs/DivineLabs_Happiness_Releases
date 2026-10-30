@@ -32,17 +32,17 @@ Client is a standalone game client. Plus includes additional gameplay modules an
 
 ## Performance
 
-The main EXE of prepared version 0.2.9 is **4.17 MiB**. Browser components are included separately in the installer and portable archive.
+The main EXE of prepared version 0.2.10 is **4.17 MiB**. Browser components are included separately in the installer and portable archive.
 
 Comparative FPS, CPU and memory benchmarks have not been published. [File sizes and measurements](docs/en/performance.md).
 
 ## Recent updates
 
-- **2026-10-30 · 0.2.9** - [Update 0.2.9 (Russian)](news/0.2.9.md)
+- **2026-10-31 · 0.2.10** - [Two Client variants: with and without WebView2](news/en/0.2.10.md)
 
-- **2026-10-30 · 0.2.8** - [Update 0.2.8 (Russian)](news/0.2.8.md)
+- **2026-10-30 · 0.2.9** - [Bundled VK sign-in component](news/en/0.2.9.md)
 
-- **2026-10-30 · 0.2.7** - [Update 0.2.7 (Russian)](news/0.2.7.md)
+- **2026-10-30 · 0.2.8** - [Installer fixes, branding and project license](news/en/0.2.8.md)
 
 [All news](NEWS.en.md)
 

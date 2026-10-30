@@ -8,13 +8,13 @@
     "discord": "https://discord.gg/vF47ExMQpn"
   },
   "build": {
-    "version": "0.2.9",
-    "date": "2026-10-30",
+    "version": "0.2.10",
+    "date": "2026-10-31",
     "channel": "preview",
-    "clientExeBytes": 4371456,
+    "clientExeBytes": 4374016,
     "plusExeBytes": 16571392,
-    "installerBytes": 338188173,
-    "portableBytes": 314828568
+    "installerBytes": 338189759,
+    "portableBytes": 314829764
   },
   "plus": {
     "status": "planned",
@@ -50,6 +50,12 @@
     "plus": null
   },
   "news": [
+    {
+      "title": "Два варианта Client: с WebView2 и без него",
+      "date": "2026-10-31",
+      "version": "0.2.10",
+      "file": "0.2.10.md"
+    },
     {
       "title": "Встроенный компонент входа через ВК",
       "date": "2026-10-30",
