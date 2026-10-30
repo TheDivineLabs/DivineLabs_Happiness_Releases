@@ -13,8 +13,8 @@
     "channel": "preview",
     "clientExeBytes": 4366848,
     "plusExeBytes": 16571392,
-    "installerBytes": 61953418,
-    "portableBytes": 38491015
+    "installerBytes": 61953445,
+    "portableBytes": 38491024
   },
   "plus": {
     "status": "planned",
