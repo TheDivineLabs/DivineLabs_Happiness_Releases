@@ -15,9 +15,9 @@
 
 ## Скачать
 
-**Публичная загрузка пока не открыта.**
+**[Установщик EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.8/DivineLabs.Happiness.Client.Setup.exe)** &nbsp; · &nbsp; **[Portable ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.8/DivineLabs-Happiness-Client-portable.zip)**
 
-Подготовленная сборка: **0.2.8 Preview**. Здесь появятся установщик EXE, portable ZIP и контрольные суммы после публикации владельцем.
+Публичная версия: **v0.2.8**. [Изменения и контрольные суммы](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.8).
 
 Предварительная версия. Полная игровая проверка ещё не завершена.
 
@@ -38,7 +38,7 @@
 | Игровое окно, темы, ссылки и скриншоты | Есть | Есть |
 | Основное приложение | Самостоятельный клиент | Клиент с дополнительными игровыми модулями |
 | Основной EXE · 0.2.8 | 4.16 МиБ | 15.80 МиБ |
-| Публичный канал | Подготавливается | После запуска подписок |
+| Публичный канал | Доступен | После запуска подписок |
 
 Plus пока не опубликован. Подписки ещё не запущены.
 
