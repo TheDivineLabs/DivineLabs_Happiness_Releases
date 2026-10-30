@@ -8,13 +8,13 @@
     "discord": "https://discord.gg/vF47ExMQpn"
   },
   "build": {
-    "version": "0.2.8",
+    "version": "0.2.9",
     "date": "2026-10-30",
     "channel": "preview",
-    "clientExeBytes": 4366848,
+    "clientExeBytes": 4371456,
     "plusExeBytes": 16571392,
-    "installerBytes": 61953445,
-    "portableBytes": 38491024
+    "installerBytes": 338188173,
+    "portableBytes": 314828568
   },
   "plus": {
     "status": "planned",
@@ -50,6 +50,12 @@
     "plus": null
   },
   "news": [
+    {
+      "title": "Встроенный компонент входа через ВК",
+      "date": "2026-10-30",
+      "version": "0.2.9",
+      "file": "0.2.9.md"
+    },
     {
       "title": "Установка, оформление и права на проект",
       "date": "2026-10-30",
