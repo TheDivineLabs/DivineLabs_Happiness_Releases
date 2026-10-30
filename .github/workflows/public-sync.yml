@@ -14,7 +14,15 @@ concurrency:
   group: public-showcase
   cancel-in-progress: true
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
   sync:
+    needs: check
     if: github.repository == 'TheDivineLabs/DivineLabs_Happiness_Releases' && vars.HAPPINESS_SOURCE_REPOSITORY != ''
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -23,9 +31,6 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           path: showcase
-      - name: Check publication boundary
-        working-directory: showcase
-        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
       - name: Read approved public feed
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
