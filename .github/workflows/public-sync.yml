@@ -20,6 +20,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
       - run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
   sync:
     needs: check
@@ -31,6 +33,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           path: showcase
+          ref: main
       - name: Update public pages
         working-directory: showcase
         env:
