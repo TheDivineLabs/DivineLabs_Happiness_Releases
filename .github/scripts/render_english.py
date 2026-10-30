@@ -19,6 +19,14 @@ def render_english(put, meta, client, news, translations, hero_svg):
     put('NEWS.en.md', '[Русский](NEWS.md) · English\n\n# Happiness news\n\nCompleted changes and prepared builds. A news entry does not mean its downloads have been published.\n\n' + '\n\n'.join(lines) + '\n')
     if client:
         downloads = f"**[EXE installer]({client['installer']['url']})** · **[Portable ZIP]({client['portable']['url']})**\n\nPublished version: **{client['tag']}**. [Release notes and checksums]({client['page']})."
+        if client.get('systemWebView2'):
+            system = client['systemWebView2']
+            downloads = f"""| Variant | Installer | Portable | VK sign-in |
+| --- | --- | --- | --- |
+| With bundled WebView2 | [EXE]({client['installer']['url']}) | [ZIP]({client['portable']['url']}) | Runtime included |
+| Without bundled WebView2 | [EXE]({system['installer']['url']}) | [ZIP]({system['portable']['url']}) | Installed system WebView2 Runtime required |
+
+Version: **{client['tag']}**. [Release notes and checksums]({client['page']}). Both variants include CEF and Flash for the game."""
     else:
         downloads = f"Public downloads are not available yet. Prepared build: **{build['version']} Preview**."
     put('README.en.md', f'''[Русский](README.md) · **English**
@@ -80,6 +88,8 @@ Independent, unofficial project. MusicWars and game assets belong to their respe
     selected = re.match(r'^v?(\d+)\.(\d+)\.(\d+)', client['tag'] if client else build['version'])
     bundled = bool(selected and tuple(map(int, selected.groups())) >= (0, 2, 9))
     runtime = ('The VK sign-in component is included in the installer and portable archive. A separate WebView2 installation is not needed. You may need to sign in again when switching to the bundled component.' if bundled else 'VK sign-in requires an installed Microsoft Edge WebView2 Runtime. The owner verified sign-in in Client 0.2.8.')
+    if client and client.get('systemWebView2'):
+        runtime = 'Two variants are available: with and without bundled WebView2. The latter requires an installed Microsoft Edge WebView2 Runtime for VK sign-in. Both include CEF and Flash for the game. Switching sign-in modes may require signing in again.'
     put('docs/en/getting-started.md', f'''[Русский](../getting-started.md) · English
 
 # Getting started

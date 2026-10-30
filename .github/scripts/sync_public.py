@@ -50,6 +50,14 @@ def published_client():
             url = assets[name]["browser_download_url"]
             if not url.startswith("https://github.com/" + REPOSITORY + "/releases/download/"): raise ValueError("Unexpected download location")
             result[key] = {"name": name, "url": url, "bytes": assets[name]["size"], "digest": assets[name].get("digest")}
+        system_names = ["DivineLabs.Happiness.Client.SystemWebView2.Setup.exe", "DivineLabs-Happiness-Client-SystemWebView2-portable.zip"]
+        if all(n in assets for n in system_names):
+            system = {}
+            for key, name in zip(["installer", "portable"], system_names):
+                url = assets[name]["browser_download_url"]
+                if not url.startswith("https://github.com/" + REPOSITORY + "/releases/download/"): raise ValueError("Unexpected system-runtime download location")
+                system[key] = {"name":name,"url":url,"bytes":assets[name]["size"],"digest":assets[name].get("digest")}
+            result["systemWebView2"] = system
         return result
     return None
 
@@ -126,6 +134,14 @@ def render(root, out, fetch=False):
     base = "https://github.com/" + REPOSITORY
     if client:
         downloads = f"**[Установщик EXE]({client['installer']['url']})** &nbsp; · &nbsp; **[Portable ZIP]({client['portable']['url']})**\n\nПубличная версия: **{html.escape(client['tag'])}**. [Изменения и контрольные суммы]({client['page']})."
+        if client.get("systemWebView2"):
+            system = client["systemWebView2"]
+            downloads = f"""| Вариант | Установщик | Portable | Вход через ВК |
+| --- | --- | --- | --- |
+| Со встроенным WebView2 | [EXE]({client['installer']['url']}) | [ZIP]({client['portable']['url']}) | Компонент включён |
+| Без встроенного WebView2 | [EXE]({system['installer']['url']}) | [ZIP]({system['portable']['url']}) | Нужен системный WebView2 Runtime |
+
+Версия: **{client['tag']}**. [Изменения и контрольные суммы]({client['page']}). CEF и Flash для игры есть в обоих вариантах."""
     else:
         downloads = "**Публичная загрузка пока не открыта.**\n\nПодготовленная сборка: **" + version + " Preview**. Здесь появятся установщик EXE, portable ZIP и контрольные суммы после публикации владельцем."
     latest = "\n\n".join(news_lines[:3]); exe = meta["sizeComparison"]["clientExeBytes"] / 1048576; plus = meta["sizeComparison"]["plusExeBytes"] / 1048576; comparison_version = meta["sizeComparison"]["version"]
@@ -201,6 +217,8 @@ Happiness распространяется на [закрытых условия
     selected = re.match(r"^v?(\d+)\.(\d+)\.(\d+)", client["tag"] if client else version)
     bundled = bool(selected and tuple(map(int, selected.groups())) >= (0, 2, 9))
     runtime_note = ("Компонент входа через ВК включён в установщик и portable; отдельно устанавливать WebView2 не нужно. При переходе на встроенный движок может потребоваться повторный вход." if bundled else "Для входа через ВК нужен установленный Microsoft Edge WebView2 Runtime. Вход в Client 0.2.8 проверен владельцем.")
+    if client and client.get("systemWebView2"):
+        runtime_note = "Есть два варианта: со встроенным WebView2 и без него. Во втором для входа через ВК нужен установленный Microsoft Edge WebView2 Runtime. CEF и Flash входят в оба пакета. При смене режима может потребоваться повторный вход."
     put("docs/getting-started.md", "# Начало работы\n\n" + ("Скачайте Client по кнопкам на главной странице или в Releases." if client else "Публичные файлы пока не опубликованы. Когда канал откроется, кнопки появятся на главной странице и в Releases.") + """
 
 1. Выберите Client Setup.exe для установки или portable ZIP для распаковки.

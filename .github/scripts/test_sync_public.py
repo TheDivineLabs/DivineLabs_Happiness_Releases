@@ -1,4 +1,4 @@
-import hashlib, json, pathlib, tempfile, unittest
+import hashlib, io, json, pathlib, tempfile, unittest
 from unittest.mock import patch
 import sync_public as public
 
@@ -60,6 +60,17 @@ class PublicationBoundaryTests(unittest.TestCase):
         folder=self.feed/"en/news";folder.mkdir(parents=True);(folder/"forbidden.pas").write_text("unit Private;",encoding="utf-8")
         with self.assertRaises(ValueError):public.render(self.feed,self.out)
         self.assertFalse((self.out/"README.md").exists())
+    def test_release_catalogue_finds_both_runtime_variants(self):
+        names=["DivineLabs.Happiness.Client.Setup.exe","DivineLabs-Happiness-Client-portable.zip","DivineLabs.Happiness.Client.SystemWebView2.Setup.exe","DivineLabs-Happiness-Client-SystemWebView2-portable.zip"]
+        base="https://github.com/"+public.REPOSITORY
+        release={"draft":False,"prerelease":True,"tag_name":"v0.2.10","html_url":base+"/releases/tag/v0.2.10","assets":[{"name":n,"state":"uploaded","browser_download_url":base+"/releases/download/v0.2.10/"+n,"size":100}for n in names]}
+        with patch.object(public.urllib.request,"urlopen",return_value=io.BytesIO(json.dumps([release]).encode())):client=public.published_client()
+        self.assertIn("systemWebView2",client)
+        with patch.object(public,"published_client",return_value=client):public.render(self.feed,self.out,True)
+        for lang in ["README.md","README.en.md"]:
+            text=(self.out/lang).read_text(encoding="utf-8")
+            for n in names:self.assertIn(n,text)
+        self.assertIn("installed Microsoft Edge WebView2 Runtime",(self.out/"docs/en/getting-started.md").read_text(encoding="utf-8"))
     def test_application_source_aborts_before_export(self):
         (self.feed/"forbidden.pas").write_text("unit PrivateApplication;",encoding="utf-8")
         with self.assertRaises(ValueError):public.render(self.feed,self.out)
