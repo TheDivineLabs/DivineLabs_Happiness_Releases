@@ -4,4 +4,4 @@
 - Binary distribution belongs in GitHub Releases and requires an explicit owner request. Plus stays unpublished until its subscription system and release are approved.
 - Generated README, NEWS, data/current.json, news articles, LICENSE and hero assets come from the dedicated public feed. Change public text in the source feed, then sync.
 - Do not publish FPS/CPU/memory improvement claims without comparable measurements. EXE size is disk size, not runtime performance.
-- The scheduled workflow is trusted-main only. Do not add pull_request_target or expose its read-only source credential to PR code. Only trusted maintainers may edit workflows.
+- The scheduled workflow reads only the committed public-channel in this public repo, using its own GITHUB_TOKEN. Never add access credentials or checkout for the private source repo. Do not add pull_request_target; only trusted maintainers may edit workflows.

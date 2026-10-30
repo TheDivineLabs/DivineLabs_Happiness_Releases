@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "product": "DivineLabs Happiness",
+  "repository": "TheDivineLabs/DivineLabs_Happiness_Releases",
+  "links": {
+    "author": "https://t.me/ps1xo_on1ks",
+    "github": "https://github.com/TheDivineLabs",
+    "discord": "https://discord.gg/vF47ExMQpn"
+  },
+  "build": {
+    "version": "0.2.8",
+    "date": "2026-10-30",
+    "channel": "preview",
+    "clientExeBytes": 4366848,
+    "plusExeBytes": 16571392,
+    "installerBytes": 61953418,
+    "portableBytes": 38491015
+  },
+  "plus": {
+    "status": "planned",
+    "publicDownloads": false
+  },
+  "performance": {
+    "fpsComparisonPublished": false,
+    "cpuComparisonPublished": false
+  },
+  "sizeComparison": {
+    "version": "0.2.8",
+    "clientExeBytes": 4366848,
+    "plusExeBytes": 16571392
+  }
+}

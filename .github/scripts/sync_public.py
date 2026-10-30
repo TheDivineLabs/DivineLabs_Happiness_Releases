@@ -1,5 +1,5 @@
 """Render approved public data. Never copy an application tree or execute source-repository code."""
-import argparse, datetime, hashlib, html, json, os, pathlib, re, urllib.request
+import argparse, datetime, html, json, os, pathlib, re, urllib.request
 
 REPOSITORY = "TheDivineLabs/DivineLabs_Happiness_Releases"
 APP_EXTENSIONS = {".pas", ".dpr", ".dfm", ".inc", ".as", ".exe", ".dll", ".zip", ".res", ".dcu"}
@@ -65,6 +65,12 @@ def hero(version):
 def render(root, out, fetch=False):
     root = root.resolve(); out = out.resolve()
     meta_text = safe_text(checked_file(root, "current.json").read_text(encoding="utf-8-sig")); meta = json.loads(meta_text)
+    if set(meta) != {"schema", "product", "repository", "links", "build", "plus", "performance", "sizeComparison"}: raise ValueError("Unknown public metadata fields")
+    if meta["product"] != "DivineLabs Happiness": raise ValueError("Unexpected product")
+    if set(meta["build"]) != {"version", "date", "channel", "clientExeBytes", "plusExeBytes", "installerBytes", "portableBytes"}: raise ValueError("Unknown build fields")
+    if meta["build"]["channel"] not in {"preview", "stable"}: raise ValueError("Unknown release channel")
+    if set(meta["sizeComparison"]) != {"version", "clientExeBytes", "plusExeBytes"}: raise ValueError("Unknown comparison fields")
+    if set(meta["performance"]) != {"fpsComparisonPublished", "cpuComparisonPublished"}: raise ValueError("Unknown performance fields")
     if meta["schema"] != 1 or meta["repository"] != REPOSITORY: raise ValueError("Wrong public channel")
     b = meta["build"]; version = b["version"]
     if not re.fullmatch(r"\d+\.\d+\.\d+", version): raise ValueError("Invalid current version")

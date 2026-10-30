@@ -5,7 +5,7 @@ on:
     - cron: '7,22,37,52 * * * *'
   push:
     branches: [main]
-    paths: ['.github/workflows/public-sync.yml', '.github/scripts/**']
+    paths: ['.github/workflows/public-sync.yml', '.github/scripts/**', 'public-channel/**']
   release:
     types: [published, edited, unpublished, deleted]
 permissions:
@@ -23,7 +23,7 @@ jobs:
       - run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
   sync:
     needs: check
-    if: github.repository == 'TheDivineLabs/DivineLabs_Happiness_Releases' && vars.HAPPINESS_SOURCE_REPOSITORY != ''
+    if: github.repository == 'TheDivineLabs/DivineLabs_Happiness_Releases'
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -31,22 +31,11 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           path: showcase
-      - name: Read approved public feed
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          repository: ${{ vars.HAPPINESS_SOURCE_REPOSITORY }}
-          ref: main
-          path: source-input
-          ssh-key: ${{ secrets.HAPPINESS_SOURCE_READ_KEY }}
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: /public-channel/
-          fetch-depth: 1
       - name: Update public pages
         working-directory: showcase
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python3 .github/scripts/sync_public.py --input ../source-input/public-channel --output . --fetch-public-releases
+        run: python3 .github/scripts/sync_public.py --input public-channel --output . --fetch-public-releases
       - name: Commit changed public pages
         working-directory: showcase
         run: |

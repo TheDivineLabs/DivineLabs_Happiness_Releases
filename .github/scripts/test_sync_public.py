@@ -8,7 +8,8 @@ class PublicationBoundaryTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(prefix="happiness-public-check-")
         self.root = pathlib.Path(self.temp.name);self.feed=self.root/"feed";self.out=self.root/"out"
         (self.feed/"news").mkdir(parents=True);(self.feed/"assets").mkdir()
-        (self.feed/"current.json").write_bytes((REPO/"data/current.json").read_bytes())
+        metadata=json.loads((REPO/"data/current.json").read_text(encoding="utf-8"));metadata.pop("news",None);metadata.pop("distribution",None)
+        (self.feed/"current.json").write_text(json.dumps(metadata),encoding="utf-8")
         (self.feed/"LICENSE").write_bytes((REPO/"LICENSE").read_bytes())
         (self.feed/"assets/divinelabs.svg").write_bytes((REPO/"assets/divinelabs.svg").read_bytes())
         self.article=self.feed/"news/test.md";self.article.write_text("---\ntitle: Test update\ndate: 2026-10-30\nversion: 0.2.8\n---\nAn approved public change.\n",encoding="utf-8")
@@ -30,6 +31,10 @@ class PublicationBoundaryTests(unittest.TestCase):
         self.assertFalse((self.out/"README.md").exists())
     def test_secret_like_content_aborts_before_export(self):
         with self.article.open("a",encoding="utf-8")as f:f.write("\nghp_"+"x"*36)
+        with self.assertRaises(ValueError):public.render(self.feed,self.out)
+        self.assertFalse((self.out/"README.md").exists())
+    def test_unknown_metadata_cannot_be_exported(self):
+        p=self.feed/"current.json";meta=json.loads(p.read_text(encoding="utf-8"));meta["unreviewed_field"]="not approved";p.write_text(json.dumps(meta),encoding="utf-8")
         with self.assertRaises(ValueError):public.render(self.feed,self.out)
         self.assertFalse((self.out/"README.md").exists())
     def test_repeated_sync_is_idempotent(self):
