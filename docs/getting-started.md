@@ -1,3 +1,5 @@
+**Русский** · [English](en/getting-started.md)
+
 # Начало работы
 
 Скачайте Client по кнопкам на главной странице или в Releases.

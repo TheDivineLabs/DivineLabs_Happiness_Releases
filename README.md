@@ -1,3 +1,5 @@
+**Русский** · [English](README.en.md)
+
 <div align="center">
 <img src="assets/hero.svg" width="100%" alt="DivineLabs Happiness - клиент MusicWars для Windows" />
 <br /><br />

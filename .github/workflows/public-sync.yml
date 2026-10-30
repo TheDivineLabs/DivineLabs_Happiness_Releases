@@ -44,7 +44,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add README.md NEWS.md LICENSE data/current.json news assets/hero.svg assets/divinelabs.svg docs/getting-started.md docs/performance.md docs/license.md
+          git add README.md README.en.md NEWS.md NEWS.en.md LICENSE data/current.json news assets/hero.svg assets/hero.en.svg assets/divinelabs.svg docs/getting-started.md docs/performance.md docs/license.md docs/en
           if ! git diff --cached --quiet; then
             git commit -m 'docs: sync public updates'
             git push origin HEAD:main

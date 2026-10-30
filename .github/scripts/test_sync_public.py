@@ -1,4 +1,4 @@
-import json, pathlib, tempfile, unittest
+import hashlib, json, pathlib, tempfile, unittest
 from unittest.mock import patch
 import sync_public as public
 
@@ -24,6 +24,7 @@ class PublicationBoundaryTests(unittest.TestCase):
         client={"tag":"v0.2.8","page":base+"/releases/tag/v0.2.8","preview":True,"installer":{"url":base+"/releases/download/v0.2.8/setup.exe"},"portable":{"url":base+"/releases/download/v0.2.8/portable.zip"}}
         with patch.object(public,"published_client",return_value=client):public.render(self.feed,self.out,True)
         self.assertIn(client["installer"]["url"],(self.out/"README.md").read_text(encoding="utf-8"))
+        self.assertIn(client["installer"]["url"],(self.out/"README.en.md").read_text(encoding="utf-8"))
         self.assertNotIn("Публичные файлы пока не опубликованы",(self.out/"docs/getting-started.md").read_text(encoding="utf-8"))
     def test_runtime_requirement_follows_published_client_version(self):
         base="https://github.com/"+public.REPOSITORY
@@ -38,6 +39,27 @@ class PublicationBoundaryTests(unittest.TestCase):
         path.write_text(json.dumps(meta),encoding="utf-8");public.render(self.feed,self.out)
         current=json.loads((self.out/"data/current.json").read_text(encoding="utf-8"))
         self.assertEqual(current["build"]["installerBytes"],338188173)
+    def add_english_translation(self):
+        source=public.read_news(self.feed)[0]
+        digest=hashlib.sha256(json.dumps({k:source[k] for k in ["title","date","version","body"]},ensure_ascii=False,sort_keys=True).encode("utf-8")).hexdigest()
+        folder=self.feed/"en/news";folder.mkdir(parents=True)
+        (folder/"test.md").write_text("---\ntitle: English update\ndate: 2026-10-30\nversion: 0.2.8\nsource_sha256: "+digest+"\n---\nCurrent English content.\n",encoding="utf-8")
+    def test_matching_translation_is_published(self):
+        self.add_english_translation();public.render(self.feed,self.out)
+        self.assertIn("Current English content.",(self.out/"news/en/test.md").read_text(encoding="utf-8"))
+        self.assertIn("English update",(self.out/"NEWS.en.md").read_text(encoding="utf-8"))
+        self.assertIn("README.en.md",(self.out/"README.md").read_text(encoding="utf-8"))
+    def test_stale_translation_falls_back_to_current_source(self):
+        self.add_english_translation()
+        with self.article.open("a",encoding="utf-8")as f:f.write("Updated source text.\n")
+        public.render(self.feed,self.out)
+        self.assertIn("(Russian)",(self.out/"NEWS.en.md").read_text(encoding="utf-8"))
+        page=(self.out/"news/en/test.md").read_text(encoding="utf-8")
+        self.assertIn("Translation unavailable",page);self.assertNotIn("Current English content",page)
+    def test_localized_folder_cannot_export_application_source(self):
+        folder=self.feed/"en/news";folder.mkdir(parents=True);(folder/"forbidden.pas").write_text("unit Private;",encoding="utf-8")
+        with self.assertRaises(ValueError):public.render(self.feed,self.out)
+        self.assertFalse((self.out/"README.md").exists())
     def test_application_source_aborts_before_export(self):
         (self.feed/"forbidden.pas").write_text("unit PrivateApplication;",encoding="utf-8")
         with self.assertRaises(ValueError):public.render(self.feed,self.out)

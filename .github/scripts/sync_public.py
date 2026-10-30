@@ -1,5 +1,7 @@
 """Render approved public data. Never copy an application tree or execute source-repository code."""
-import argparse, datetime, html, json, os, pathlib, re, urllib.request
+import argparse, datetime, hashlib, html, json, os, pathlib, re, sys, urllib.request
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from render_english import render_english
 
 REPOSITORY = "TheDivineLabs/DivineLabs_Happiness_Releases"
 APP_EXTENSIONS = {".pas", ".dpr", ".dfm", ".inc", ".as", ".exe", ".dll", ".zip", ".res", ".dcu"}
@@ -16,7 +18,7 @@ def checked_file(root, relative):
     if not p.is_file() or p.stat().st_size > 256 * 1024: raise ValueError("Missing or oversized public text")
     return p
 
-def read_news(root):
+def read_news(root, translated=False):
     items = []
     for p in sorted((root / "news").glob("*.md")):
         if not re.fullmatch(r"[a-zA-Z0-9._-]+\.md", p.name): raise ValueError("Invalid news filename")
@@ -25,7 +27,8 @@ def read_news(root):
         front, body = text[4:].split("\n---\n", 1)
         fields = dict(line.split(":", 1) for line in front.splitlines() if line.strip())
         fields = {k.strip(): v.strip() for k, v in fields.items()}
-        if set(fields) != {"title", "date", "version"}: raise ValueError("Unknown news fields")
+        if set(fields) != ({"title", "date", "version", "source_sha256"} if translated else {"title", "date", "version"}): raise ValueError("Unknown news fields")
+        if translated and not re.fullmatch(r"[0-9a-f]{64}", fields["source_sha256"]): raise ValueError("Invalid translation source hash")
         datetime.date.fromisoformat(fields["date"])
         if len(fields["title"]) > 160 or any(c in fields["title"] for c in "[]<>\r\n"): raise ValueError("Invalid news title")
         if not re.fullmatch(r"\d+\.\d+\.\d+(?:-[A-Za-z0-9.-]+)?", fields["version"]): raise ValueError("Invalid news version")
@@ -83,13 +86,25 @@ def render(root, out, fetch=False):
     links = meta["links"]
     if links != {"author": "https://t.me/ps1xo_on1ks", "github": "https://github.com/TheDivineLabs", "discord": "https://discord.gg/vF47ExMQpn"}: raise ValueError("Unexpected public contacts")
     news = read_news(root); client = published_client() if fetch else None
+    english_news = read_news(root / "en", translated=True) if (root / "en/news").exists() else []
+    originals = {n["file"]:n for n in news}
+    translations = {}
+    for item in english_news:
+        original = originals.get(item["file"])
+        if original is None: raise ValueError("Translation has no source article")
+        digest = hashlib.sha256(json.dumps({k:original[k] for k in ["title", "date", "version", "body"]},ensure_ascii=False,sort_keys=True).encode("utf-8")).hexdigest()
+        if item["source_sha256"] == digest and item["date"] == original["date"] and item["version"] == original["version"]:
+            translations[item["file"]] = item
     def put(name, value):
+        ru_pages = {"README.md":"README.en.md", "NEWS.md":"NEWS.en.md", "docs/getting-started.md":"en/getting-started.md", "docs/performance.md":"en/performance.md", "docs/license.md":"en/license.md"}
+        if name in ru_pages and isinstance(value, str):
+            value = "**Русский** · [English](" + ru_pages[name] + ")\n\n" + value
         destination = out / name
         if not destination.resolve().is_relative_to(out) or destination.is_symlink(): raise ValueError("Unsafe output path")
         destination.parent.mkdir(parents=True, exist_ok=True)
         data = value if isinstance(value, bytes) else value.encode("utf-8")
         if not destination.exists() or destination.read_bytes() != data: destination.write_bytes(data)
-    approved = {"current.json", "LICENSE", "assets/divinelabs.svg"} | {"news/" + n["file"] for n in news}
+    approved = {"current.json", "LICENSE", "assets/divinelabs.svg"} | {"news/" + n["file"] for n in news} | {"en/news/" + n["file"] for n in english_news}
     for p in root.rglob("*"):
         if p.is_symlink(): raise ValueError("Symlinks are not allowed in the public feed")
         if p.is_file() and (p.suffix.lower() in APP_EXTENSIONS or p.relative_to(root).as_posix() not in approved): raise ValueError("Application files are forbidden in the public feed")
@@ -99,7 +114,7 @@ def render(root, out, fetch=False):
     put("LICENSE", safe_text(checked_file(root, "LICENSE").read_text(encoding="utf-8-sig")))
     news_lines = []
     for n in news:
-        put("news/" + n["file"], "# " + n["title"] + "\n\n" + n["date"] + " · " + n["version"] + "\n\n" + n["body"] + "\n")
+        put("news/" + n["file"], "[English](en/" + n["file"] + ")\n\n# " + n["title"] + "\n\n" + n["date"] + " · " + n["version"] + "\n\n" + n["body"] + "\n")
         news_lines.append("- **" + n["date"] + " · " + n["version"] + "** - [" + n["title"] + "](news/" + n["file"] + ")")
     for stale in (out / "news").glob("*.md"):
         if stale.name not in {n["file"] for n in news}:
@@ -227,6 +242,11 @@ Happiness распространяется на [закрытых условия
 
 Это краткое объяснение. Полный текст и точная область действия находятся в [LICENSE](../LICENSE).
 """)
+    render_english(put, meta, client, news, translations, hero(version))
+    for stale in (out / "news/en").glob("*.md"):
+        if stale.name not in originals:
+            if stale.is_symlink() or not stale.resolve().is_relative_to(out): raise ValueError("Unsafe obsolete translation path")
+            stale.unlink()
     print(f"Synced {len(news)} public news entries; prepared build {version}; public Client downloads: {bool(client)}. No application files copied.")
 
 if __name__ == "__main__":

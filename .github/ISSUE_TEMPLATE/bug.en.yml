@@ -1,0 +1,23 @@
+name: Bug report · English
+description: Describe the problem and how to reproduce it
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Application version
+      placeholder: "Client 0.2.9, installer or portable"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include steps, the expected result and the error text. Do not include passwords, sign-in codes or links containing tokens.
+    validations:
+      required: true

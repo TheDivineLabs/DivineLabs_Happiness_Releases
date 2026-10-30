@@ -1,3 +1,5 @@
+**Русский** · [English](en/license.md)
+
 # Какие права даёт лицензия
 
 Название: **DivineLabs Happiness Proprietary License**. Идентификатор: **LicenseRef-DivineLabs-Happiness-Proprietary**. Это собственные закрытые условия проекта, не MIT и не стандартная открытая лицензия.
