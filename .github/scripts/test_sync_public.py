@@ -32,6 +32,12 @@ class PublicationBoundaryTests(unittest.TestCase):
         instructions=(self.out/"docs/getting-started.md").read_text(encoding="utf-8")
         self.assertIn("отдельно устанавливать WebView2 не нужно",instructions)
         self.assertNotIn("нужен установленный Microsoft Edge WebView2",instructions)
+    def test_bundled_runtime_package_sizes_are_supported(self):
+        path=self.feed/"current.json";meta=json.loads(path.read_text(encoding="utf-8"))
+        meta["build"]["installerBytes"]=338188173;meta["build"]["portableBytes"]=314828568
+        path.write_text(json.dumps(meta),encoding="utf-8");public.render(self.feed,self.out)
+        current=json.loads((self.out/"data/current.json").read_text(encoding="utf-8"))
+        self.assertEqual(current["build"]["installerBytes"],338188173)
     def test_application_source_aborts_before_export(self):
         (self.feed/"forbidden.pas").write_text("unit PrivateApplication;",encoding="utf-8")
         with self.assertRaises(ValueError):public.render(self.feed,self.out)

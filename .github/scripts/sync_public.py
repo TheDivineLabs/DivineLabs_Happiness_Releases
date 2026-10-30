@@ -76,7 +76,8 @@ def render(root, out, fetch=False):
     if not re.fullmatch(r"\d+\.\d+\.\d+", version): raise ValueError("Invalid current version")
     datetime.date.fromisoformat(b["date"])
     for key in ["clientExeBytes", "plusExeBytes", "installerBytes", "portableBytes"]:
-        if not isinstance(b[key], int) or not 0 < b[key] < 300 * 1048576: raise ValueError("Invalid measured file size")
+        limit = 300 * 1048576 if key.endswith("ExeBytes") else 2 * 1024**3
+        if not isinstance(b[key], int) or not 0 < b[key] < limit: raise ValueError("Invalid measured file size")
     if any(meta["performance"].values()): raise ValueError("Runtime improvement claims need a separately reviewed benchmark report")
     if meta["plus"] != {"status": "planned", "publicDownloads": False}: raise ValueError("Plus publication is not enabled")
     links = meta["links"]
