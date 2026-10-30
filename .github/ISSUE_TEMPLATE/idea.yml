@@ -1,0 +1,12 @@
+name: Предложить улучшение
+description: Как сделать Happiness удобнее
+title: "[Идея]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Что хочется улучшить
+      description: Опишите задачу и как вы решаете её сейчас.
+    validations:
+      required: true

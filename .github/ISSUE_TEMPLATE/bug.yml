@@ -1,0 +1,23 @@
+name: Сообщить об ошибке
+description: Что произошло и как это повторить
+title: "[Ошибка]: "
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Версия приложения
+      placeholder: "Например, Client 0.2.8, установщик или portable"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Версия Windows
+  - type: textarea
+    id: problem
+    attributes:
+      label: Что произошло
+      description: Укажите шаги, ожидаемый результат и текст ошибки. Не добавляйте пароли, коды входа и ссылки с токенами.
+    validations:
+      required: true

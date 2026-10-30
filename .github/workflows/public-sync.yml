@@ -1,0 +1,54 @@
+name: Sync public showcase
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  push:
+    branches: [main]
+    paths: ['.github/workflows/public-sync.yml', '.github/scripts/**']
+  release:
+    types: [published, edited, unpublished, deleted]
+permissions:
+  contents: write
+concurrency:
+  group: public-showcase
+  cancel-in-progress: true
+jobs:
+  sync:
+    if: github.repository == 'TheDivineLabs/DivineLabs_Happiness_Releases' && vars.HAPPINESS_SOURCE_REPOSITORY != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout public showcase
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          path: showcase
+      - name: Check publication boundary
+        working-directory: showcase
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+      - name: Read approved public feed
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: ${{ vars.HAPPINESS_SOURCE_REPOSITORY }}
+          ref: main
+          path: source-input
+          ssh-key: ${{ secrets.HAPPINESS_SOURCE_READ_KEY }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /public-channel/
+          fetch-depth: 1
+      - name: Update public pages
+        working-directory: showcase
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/sync_public.py --input ../source-input/public-channel --output . --fetch-public-releases
+      - name: Commit changed public pages
+        working-directory: showcase
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md NEWS.md LICENSE data/current.json news assets/hero.svg assets/divinelabs.svg docs/getting-started.md docs/performance.md docs/license.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'docs: sync public updates'
+            git push origin HEAD:main
+          fi

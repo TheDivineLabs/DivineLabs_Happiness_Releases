@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "product": "DivineLabs Happiness",
+  "repository": "TheDivineLabs/DivineLabs_Happiness_Releases",
+  "links": {
+    "author": "https://t.me/ps1xo_on1ks",
+    "github": "https://github.com/TheDivineLabs",
+    "discord": "https://discord.gg/vF47ExMQpn"
+  },
+  "build": {
+    "version": "0.2.8",
+    "date": "2026-10-30",
+    "channel": "preview",
+    "clientExeBytes": 4366848,
+    "plusExeBytes": 16571392,
+    "installerBytes": 61953418,
+    "portableBytes": 38491015
+  },
+  "plus": {
+    "status": "planned",
+    "publicDownloads": false
+  },
+  "performance": {
+    "fpsComparisonPublished": false,
+    "cpuComparisonPublished": false
+  },
+  "sizeComparison": {
+    "version": "0.2.8",
+    "clientExeBytes": 4366848,
+    "plusExeBytes": 16571392
+  },
+  "distribution": {
+    "client": null,
+    "plus": null
+  },
+  "news": [
+    {
+      "title": "Установка, подпись и права на проект",
+      "date": "2026-10-30",
+      "version": "0.2.8",
+      "file": "0.2.8.md"
+    },
+    {
+      "title": "Самостоятельный Client без дополнительных модулей",
+      "date": "2026-10-30",
+      "version": "0.2.7",
+      "file": "0.2.7.md"
+    },
+    {
+      "title": "Локальные замеры производительности",
+      "date": "2026-10-30",
+      "version": "0.2.6",
+      "file": "0.2.6.md"
+    }
+  ]
+}
