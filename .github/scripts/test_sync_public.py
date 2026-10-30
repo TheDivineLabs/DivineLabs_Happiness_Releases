@@ -25,6 +25,13 @@ class PublicationBoundaryTests(unittest.TestCase):
         with patch.object(public,"published_client",return_value=client):public.render(self.feed,self.out,True)
         self.assertIn(client["installer"]["url"],(self.out/"README.md").read_text(encoding="utf-8"))
         self.assertNotIn("Публичные файлы пока не опубликованы",(self.out/"docs/getting-started.md").read_text(encoding="utf-8"))
+    def test_runtime_requirement_follows_published_client_version(self):
+        base="https://github.com/"+public.REPOSITORY
+        client={"tag":"v0.2.9","page":base+"/releases/tag/v0.2.9","preview":True,"installer":{"url":base+"/releases/download/v0.2.9/setup.exe"},"portable":{"url":base+"/releases/download/v0.2.9/portable.zip"}}
+        with patch.object(public,"published_client",return_value=client):public.render(self.feed,self.out,True)
+        instructions=(self.out/"docs/getting-started.md").read_text(encoding="utf-8")
+        self.assertIn("отдельно устанавливать WebView2 не нужно",instructions)
+        self.assertNotIn("нужен установленный Microsoft Edge WebView2",instructions)
     def test_application_source_aborts_before_export(self):
         (self.feed/"forbidden.pas").write_text("unit PrivateApplication;",encoding="utf-8")
         with self.assertRaises(ValueError):public.render(self.feed,self.out)
