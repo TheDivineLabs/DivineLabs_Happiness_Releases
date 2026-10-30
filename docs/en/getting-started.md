@@ -9,7 +9,7 @@ Download Client from the main page or Releases.
 3. Extract the complete portable archive and run `DivineLabs.Happiness.exe` from its root.
 4. Settings, sign-in profiles and screenshots are stored in `Data`.
 
-The VK sign-in component is included in the installer and portable archive. A separate WebView2 installation is not needed. You may need to sign in again when switching to the bundled component. Sound is disabled.
+Two variants are available: with and without bundled WebView2. The latter requires an installed Microsoft Edge WebView2 Runtime for VK sign-in. Both include CEF and Flash for the game. Switching sign-in modes may require signing in again. Sound is disabled.
 
 Uninstalling preserves user data by default. Full removal is a separate option. Installation, upgrade and removal were tested on disposable installations; later package checks verify the packaged files and installer integrity.
 

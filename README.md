@@ -17,9 +17,12 @@
 
 ## Скачать
 
-**[Установщик EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.9/DivineLabs.Happiness.Client.Setup.exe)** &nbsp; · &nbsp; **[Portable ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.9/DivineLabs-Happiness-Client-portable.zip)**
+| Вариант | Установщик | Portable | Вход через ВК |
+| --- | --- | --- | --- |
+| Со встроенным WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs.Happiness.Client.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs-Happiness-Client-portable.zip) | Компонент включён |
+| Без встроенного WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs-Happiness-Client-SystemWebView2-portable.zip) | Нужен системный WebView2 Runtime |
 
-Публичная версия: **v0.2.9**. [Изменения и контрольные суммы](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.9).
+Версия: **v0.2.10**. [Изменения и контрольные суммы](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.10). CEF и Flash для игры есть в обоих вариантах.
 
 Предварительная версия. Полная игровая проверка ещё не завершена.
 

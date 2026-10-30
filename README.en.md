@@ -10,9 +10,12 @@ MusicWars client for Windows. Available as an installer and a portable archive.
 
 ## Download
 
-**[EXE installer](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.9/DivineLabs.Happiness.Client.Setup.exe)** · **[Portable ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.9/DivineLabs-Happiness-Client-portable.zip)**
+| Variant | Installer | Portable | VK sign-in |
+| --- | --- | --- | --- |
+| With bundled WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs.Happiness.Client.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs-Happiness-Client-portable.zip) | Runtime included |
+| Without bundled WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs-Happiness-Client-SystemWebView2-portable.zip) | Installed system WebView2 Runtime required |
 
-Published version: **v0.2.9**. [Release notes and checksums](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.9).
+Version: **v0.2.10**. [Release notes and checksums](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.10). Both variants include CEF and Flash for the game.
 
 Preview release. Full gameplay testing is still in progress.
 
