@@ -31,33 +31,33 @@
   },
   "distribution": {
     "client": {
-      "tag": "v0.2.10",
-      "page": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.10",
+      "tag": "v0.2.11",
+      "page": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.11",
       "preview": true,
       "installer": {
         "name": "DivineLabs.Happiness.Client.Setup.exe",
-        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs.Happiness.Client.Setup.exe",
-        "bytes": 338189759,
-        "digest": "sha256:7c034fced007872ab6ac9a919aaaf625935c3a7327b6bd63e2b48a31247998df"
+        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.11/DivineLabs.Happiness.Client.Setup.exe",
+        "bytes": 338197374,
+        "digest": "sha256:aed0e65c6c1bed453bc3a51d4d8a85b2b596178cf0e34fcc6261fe6941268cc4"
       },
       "portable": {
         "name": "DivineLabs-Happiness-Client-portable.zip",
-        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs-Happiness-Client-portable.zip",
-        "bytes": 314829764,
-        "digest": "sha256:b2fc6c08688da1e8286902e57fb466be52e7ec2769a21f4e8fa6619fc4f65660"
+        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.11/DivineLabs-Happiness-Client-portable.zip",
+        "bytes": 314839310,
+        "digest": "sha256:d90a2f9844aa1c424f9f51556d357ff2bd92540113b79eb2bb67a435d634a201"
       },
       "systemWebView2": {
         "installer": {
           "name": "DivineLabs.Happiness.Client.SystemWebView2.Setup.exe",
-          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe",
-          "bytes": 61956118,
-          "digest": "sha256:30aa80dff0724a1aa80cc2a6337c3738d226fc37187ada7d9ee836b93aa42449"
+          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.11/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe",
+          "bytes": 61965651,
+          "digest": "sha256:106359d7c84abafeb71e06ee1eb849fc13b57e6a6c2e08b94e8bc78df794d1b8"
         },
         "portable": {
           "name": "DivineLabs-Happiness-Client-SystemWebView2-portable.zip",
-          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.10/DivineLabs-Happiness-Client-SystemWebView2-portable.zip",
-          "bytes": 38494182,
-          "digest": "sha256:de019587b9ec3e1e9dd11d7fa898a1d4a47edf382a8a4f19e5330ab585b1883d"
+          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.11/DivineLabs-Happiness-Client-SystemWebView2-portable.zip",
+          "bytes": 38503728,
+          "digest": "sha256:cae5418730aca78fbfc7d37a14691ca312284270a9ab0abf3ac338e41475b9a5"
         }
       }
     },
