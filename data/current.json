@@ -65,6 +65,12 @@
   },
   "news": [
     {
+      "title": "ClientPlus: действия на экране",
+      "date": "2026-11-01",
+      "version": "0.2.8",
+      "file": "2026-11-01-clientplus-activity.md"
+    },
+    {
       "title": "Два варианта Client: с WebView2 и без него",
       "date": "2026-10-31",
       "version": "0.2.10",
