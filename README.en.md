@@ -35,17 +35,17 @@ Client is a standalone game client. Plus includes additional gameplay modules an
 
 ## Performance
 
-The main EXE of prepared version 0.2.10 is **4.17 MiB**. Browser components are included separately in the installer and portable archive.
+The main EXE of prepared version 0.2.11 is **4.19 MiB**. Browser components are included separately in the installer and portable archive.
 
 Comparative FPS, CPU and memory benchmarks have not been published. [File sizes and measurements](docs/en/performance.md).
 
 ## Recent updates
 
+- **2026-11-01 · 0.2.11** - [Client 0.2.11: Flash animation fixes](news/en/0.2.11.md)
+
 - **2026-11-01 · 0.2.8** - [ClientPlus: on-screen activity](news/en/2026-11-01-clientplus-activity.md)
 
 - **2026-10-31 · 0.2.10** - [Two Client variants: with and without WebView2](news/en/0.2.10.md)
-
-- **2026-10-30 · 0.2.9** - [Bundled VK sign-in component](news/en/0.2.9.md)
 
 [All news](NEWS.en.md)
 

@@ -4,6 +4,8 @@
 
 Completed changes and prepared builds. A news entry does not mean its downloads have been published.
 
+- **2026-11-01 · 0.2.11** - [Client 0.2.11: Flash animation fixes](news/en/0.2.11.md)
+
 - **2026-11-01 · 0.2.8** - [ClientPlus: on-screen activity](news/en/2026-11-01-clientplus-activity.md)
 
 - **2026-10-31 · 0.2.10** - [Two Client variants: with and without WebView2](news/en/0.2.10.md)

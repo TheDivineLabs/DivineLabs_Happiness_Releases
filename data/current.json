@@ -8,13 +8,13 @@
     "discord": "https://discord.gg/vF47ExMQpn"
   },
   "build": {
-    "version": "0.2.10",
-    "date": "2026-10-31",
+    "version": "0.2.11",
+    "date": "2026-11-01",
     "channel": "preview",
-    "clientExeBytes": 4374016,
-    "plusExeBytes": 16571392,
-    "installerBytes": 338189759,
-    "portableBytes": 314829764
+    "clientExeBytes": 4396544,
+    "plusExeBytes": 16643584,
+    "installerBytes": 338197374,
+    "portableBytes": 314839310
   },
   "plus": {
     "status": "planned",
@@ -64,6 +64,12 @@
     "plus": null
   },
   "news": [
+    {
+      "title": "Client 0.2.11: исправления анимаций Flash",
+      "date": "2026-11-01",
+      "version": "0.2.11",
+      "file": "0.2.11.md"
+    },
     {
       "title": "ClientPlus: действия на экране",
       "date": "2026-11-01",
