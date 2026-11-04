@@ -8,13 +8,13 @@
     "discord": "https://discord.gg/vF47ExMQpn"
   },
   "build": {
-    "version": "0.2.12",
+    "version": "0.2.13",
     "date": "2026-11-04",
     "channel": "preview",
     "clientExeBytes": 3843072,
     "plusExeBytes": 16643584,
-    "installerBytes": 339174652,
-    "portableBytes": 315829674
+    "installerBytes": 352311656,
+    "portableBytes": 349597907
   },
   "plus": {
     "status": "planned",
@@ -64,6 +64,12 @@
     "plus": null
   },
   "news": [
+    {
+      "title": "Единый мастер обслуживания",
+      "date": "2026-11-04",
+      "version": "0.2.13-dev",
+      "file": "2026-11-04-maintenance-hub.md"
+    },
     {
       "title": "Восстановление запуска и обновления из приложения",
       "date": "2026-11-04",

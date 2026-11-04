@@ -35,17 +35,17 @@ Client is a standalone game client. Plus includes additional gameplay modules an
 
 ## Performance
 
-The main EXE of prepared version 0.2.12 is **3.67 MiB**. Browser components are included separately in the installer and portable archive.
+The main EXE of prepared version 0.2.13 is **3.67 MiB**. Browser components are included separately in the installer and portable archive.
 
 Comparative FPS, CPU and memory benchmarks have not been published. [File sizes and measurements](docs/en/performance.md).
 
 ## Recent updates
 
+- **2026-11-04 · 0.2.13-dev** - [One maintenance wizard](news/en/2026-11-04-maintenance-hub.md)
+
 - **2026-11-04 · 0.2.12-dev** - [Startup recovery and in-app updates](news/en/2026-11-04-recovery-updates.md)
 
 - **2026-11-04 · 0.2.10-dev** - [Keep the application open after a browser crash](news/en/2026-11-04-startup-isolation.md)
-
-- **2026-11-01 · 0.2.11** - [Client 0.2.11: Flash animation fixes](news/en/0.2.11.md)
 
 [All news](NEWS.en.md)
 
