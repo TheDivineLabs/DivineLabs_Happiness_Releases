@@ -4,6 +4,8 @@
 
 Completed changes and prepared builds. A news entry does not mean its downloads have been published.
 
+- **2026-11-04 · 0.2.12-dev** - [Startup recovery and in-app updates](news/en/2026-11-04-recovery-updates.md)
+
 - **2026-11-04 · 0.2.10-dev** - [Keep the application open after a browser crash](news/en/2026-11-04-startup-isolation.md)
 
 - **2026-11-01 · 0.2.11** - [Client 0.2.11: Flash animation fixes](news/en/0.2.11.md)
