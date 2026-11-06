@@ -4,7 +4,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from render_english import render_english
 
 REPOSITORY = "TheDivineLabs/DivineLabs_Happiness_Releases"
-APP_EXTENSIONS = {".pas", ".dpr", ".dfm", ".inc", ".as", ".exe", ".dll", ".zip", ".res", ".dcu"}
+APP_EXTENSIONS = {".pas", ".dpr", ".dfm", ".inc", ".as", ".exe", ".dll", ".zip", ".res", ".dcu", ".rs", ".rlib", ".rmeta", ".pdb"}
 PRIVATE = re.compile(r"W:[/\\]DEV|github_pat_[A-Za-z0-9_]+|gh[pousr]_[A-Za-z0-9]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|https://github\.com/TheDivineLabs/DivineLabs_Happiness(?!_Releases)", re.I)
 
 def safe_text(value):
@@ -104,6 +104,14 @@ def render(root, out, fetch=False):
         if item["source_sha256"] == digest and item["date"] == original["date"] and item["version"] == original["version"]:
             translations[item["file"]] = item
     def put(name, value):
+        rust_article = next((n for n in news if n['version'].endswith('-rust')), None)
+        if rust_article and isinstance(value, str):
+            if name == 'README.md':
+                section = '## Rust Client (предварительная версия)\n\nОтдельный portable-клиент для ручной игры. [Возможности, ограничения и загрузки](news/' + rust_article['file'] + '). Delphi и его автообновления остаются в своём канале.\n\n'
+                value = value.replace('## Возможности\n', section + '## Возможности\n', 1)
+            elif name == 'README.en.md':
+                section = '## Rust Client (preview)\n\nA separate portable client for manual play. [Features, limitations and downloads](news/en/' + rust_article['file'] + '). Delphi and its updates remain in their own channel.\n\n'
+                value = value.replace('## Features\n', section + '## Features\n', 1)
         ru_pages = {"README.md":"README.en.md", "NEWS.md":"NEWS.en.md", "docs/getting-started.md":"en/getting-started.md", "docs/performance.md":"en/performance.md", "docs/license.md":"en/license.md"}
         if name in ru_pages and isinstance(value, str):
             value = "**Русский** · [English](" + ru_pages[name] + ")\n\n" + value

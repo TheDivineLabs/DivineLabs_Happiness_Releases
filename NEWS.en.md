@@ -4,6 +4,8 @@
 
 Completed changes and prepared builds. A news entry does not mean its downloads have been published.
 
+- **2026-11-07 · 0.1.0-rust** - [Rust Client 0.1.0: VK sign-in and manual play](news/en/2026-11-07-rust-client.md)
+
 - **2026-11-05 · 0.2.14** - [Client 0.2.14 application updates and crash recovery](news/en/2026-11-05-client-0.2.14.md)
 
 - **2026-11-04 · 0.2.13-dev** - [One maintenance wizard](news/en/2026-11-04-maintenance-hub.md)
