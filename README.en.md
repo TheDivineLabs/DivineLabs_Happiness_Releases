@@ -21,7 +21,7 @@ Preview release. Full gameplay testing is still in progress.
 
 ## Rust Client (preview)
 
-A separate portable client for manual play. [Features, limitations and downloads](news/en/2026-11-07-rust-client.md). Delphi and its updates remain in their own channel.
+A separate portable client for manual play. [Features, limitations and downloads](news/en/2026-11-07-rust-client-menu.md). Delphi and its updates remain in their own channel.
 
 ## Features
 
@@ -45,11 +45,11 @@ Comparative FPS, CPU and memory benchmarks have not been published. [File sizes 
 
 ## Recent updates
 
+- **2026-11-07 · 0.1.1-rust** - [New menu and metrics in Rust Client 0.1.1](news/en/2026-11-07-rust-client-menu.md)
+
 - **2026-11-07 · 0.1.0-rust** - [Rust Client 0.1.0: VK sign-in and manual play](news/en/2026-11-07-rust-client.md)
 
 - **2026-11-05 · 0.2.14** - [Client 0.2.14 application updates and crash recovery](news/en/2026-11-05-client-0.2.14.md)
-
-- **2026-11-04 · 0.2.13-dev** - [One maintenance wizard](news/en/2026-11-04-maintenance-hub.md)
 
 [All news](NEWS.en.md)
 
