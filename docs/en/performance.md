@@ -10,8 +10,8 @@ Recorded main EXE sizes for version 0.2.8:
 
 The editions contain different modules. File size is not a measure of FPS, CPU usage or RAM usage. Browser components add to the total download and installation size.
 
-The app can record technical measurements for 60 seconds. Recording is disabled by default. Reports are saved locally under `Data/Diagnostics/Performance` and are not uploaded automatically.
+The Client → Metrics panel can display memory, CPU and Flash readings.
 
-Reports include CPU usage, memory and available Flash frame intervals. Game logic events are not equivalent to displayed frames; they are not reported as visible FPS.
+Flash cadence measures frame events. Displayed FPS requires a separate measurement.
 
 Comparable browser benchmarks and graphics optimization results have not been published. Comparisons need the same scene, window size and cache state, a warm-up period and repeated runs.

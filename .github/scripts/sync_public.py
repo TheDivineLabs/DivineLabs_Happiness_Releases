@@ -43,14 +43,18 @@ def published_client():
     for release in releases:
         if release["draft"]: continue
         assets = {a["name"]: a for a in release["assets"] if a.get("state") == "uploaded"}
-        names = ["DivineLabs.Happiness.Client.Setup.exe", "DivineLabs-Happiness-Client-portable.zip"]
+        current = "DivineLabs.Happiness.Client.Release.json" in assets
+        names = (["DivineLabs.Happiness.Client.Bundled.Setup.exe", "DivineLabs.Happiness.Client.Bundled.portable.zip"]
+                 if current else ["DivineLabs.Happiness.Client.Setup.exe", "DivineLabs-Happiness-Client-portable.zip"])
         if not all(n in assets for n in names): continue
         result = {"tag": release["tag_name"], "page": release["html_url"], "preview": release["prerelease"]}
         for key, name in zip(["installer", "portable"], names):
             url = assets[name]["browser_download_url"]
             if not url.startswith("https://github.com/" + REPOSITORY + "/releases/download/"): raise ValueError("Unexpected download location")
             result[key] = {"name": name, "url": url, "bytes": assets[name]["size"], "digest": assets[name].get("digest")}
-        system_names = ["DivineLabs.Happiness.Client.SystemWebView2.Setup.exe", "DivineLabs-Happiness-Client-SystemWebView2-portable.zip"]
+        system_names = ["DivineLabs.Happiness.Client.SystemWebView2.Setup.exe",
+                        ("DivineLabs.Happiness.Client.SystemWebView2.portable.zip" if current
+                         else "DivineLabs-Happiness-Client-SystemWebView2-portable.zip")]
         if all(n in assets for n in system_names):
             system = {}
             for key, name in zip(["installer", "portable"], system_names):
@@ -67,7 +71,7 @@ def hero(version):
 <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#111629"/><stop offset="1" stop-color="#20193e"/></linearGradient><linearGradient id="accent" x2="1" y2="1"><stop stop-color="#ba9cff"/><stop offset="1" stop-color="#7761ff"/></linearGradient><linearGradient id="window" x2="0" y2="1"><stop stop-color="#302a50"/><stop offset="1" stop-color="#181b30"/></linearGradient></defs>
 <rect width="1280" height="420" rx="24" fill="url(#bg)"/><circle cx="1090" cy="210" r="300" fill="none" stroke="#403362" stroke-width="1"/><circle cx="1090" cy="210" r="230" fill="none" stroke="#403362"/><circle cx="1090" cy="210" r="165" fill="none" stroke="#4a3d71"/>
 <g font-family="Segoe UI,Inter,Arial,sans-serif"><text x="64" y="75" fill="#b5a2ee" font-size="16" letter-spacing="5">DIVINELABS / MUSICWARS</text><text x="60" y="174" fill="#faf8ff" font-size="82" font-weight="700" letter-spacing="-2">Happiness</text><text x="65" y="225" fill="#c4c4db" font-size="23">Клиент MusicWars для Windows.</text>
-<rect x="64" y="276" width="150" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="89" y="301" fill="#ece5ff" font-size="15">Windows x64</text><rect x="226" y="276" width="160" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="247" y="301" fill="#ece5ff" font-size="15">Preview {v}</text><text x="65" y="367" fill="#8e90aa" font-size="15">УСТАНОВЩИК EXE  ·  PORTABLE ZIP</text></g>
+<rect x="64" y="276" width="150" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="89" y="301" fill="#ece5ff" font-size="15">Windows x64</text><rect x="226" y="276" width="160" height="38" rx="19" fill="#292540" stroke="#645185"/><text x="247" y="301" fill="#ece5ff" font-size="15">Версия {v}</text><text x="65" y="367" fill="#8e90aa" font-size="15">УСТАНОВЩИК EXE  ·  PORTABLE ZIP</text></g>
 <g transform="translate(826 77)"><rect x="12" y="20" width="360" height="252" rx="22" fill="#0b1020" opacity=".35"/><rect width="360" height="252" rx="22" fill="url(#window)" stroke="#6b5a96"/><path d="M0 49h360" stroke="#55456f"/><circle cx="25" cy="25" r="5" fill="#b6a2e8"/><circle cx="43" cy="25" r="5" fill="#8f7fbb"/><circle cx="61" cy="25" r="5" fill="#665c89"/><rect x="24" y="74" width="312" height="144" rx="13" fill="#151a2c" stroke="#38324c"/>
 <g transform="translate(127 82) scale(.72)"><rect width="144" height="144" rx="34" fill="url(#accent)"/><path d="M28 38C28 22 40 16 54 16H64C82 16 96 26 104 42H50C41 42 33 47 28 54ZM28 66C28 54 40 48 52 48H106C109 58 109 67 106 78H50C41 78 33 83 28 91ZM28 102C28 90 40 84 52 84H103C95 102 79 114 61 114H49C40 114 33 119 28 124Z" transform="translate(8 -2)" fill="white"/></g>
 <rect x="240" y="192" width="102" height="85" rx="13" fill="#24223b" stroke="#8872b6"/><rect x="255" y="208" width="71" height="9" rx="4" fill="#9b83d8"/><rect x="255" y="228" width="48" height="7" rx="3" fill="#625574"/><rect x="255" y="245" width="61" height="7" rx="3" fill="#625574"/></g></svg>
@@ -104,14 +108,6 @@ def render(root, out, fetch=False):
         if item["source_sha256"] == digest and item["date"] == original["date"] and item["version"] == original["version"]:
             translations[item["file"]] = item
     def put(name, value):
-        rust_article = next((n for n in news if n['version'].endswith('-rust')), None)
-        if rust_article and isinstance(value, str):
-            if name == 'README.md':
-                section = '## Rust Client (предварительная версия)\n\nОтдельный portable-клиент для ручной игры. [Возможности, ограничения и загрузки](news/' + rust_article['file'] + '). Delphi и его автообновления остаются в своём канале.\n\n'
-                value = value.replace('## Возможности\n', section + '## Возможности\n', 1)
-            elif name == 'README.en.md':
-                section = '## Rust Client (preview)\n\nA separate portable client for manual play. [Features, limitations and downloads](news/en/' + rust_article['file'] + '). Delphi and its updates remain in their own channel.\n\n'
-                value = value.replace('## Features\n', section + '## Features\n', 1)
         ru_pages = {"README.md":"README.en.md", "NEWS.md":"NEWS.en.md", "docs/getting-started.md":"en/getting-started.md", "docs/performance.md":"en/performance.md", "docs/license.md":"en/license.md"}
         if name in ru_pages and isinstance(value, str):
             value = "**Русский** · [English](" + ru_pages[name] + ")\n\n" + value
@@ -136,7 +132,7 @@ def render(root, out, fetch=False):
         if stale.name not in {n["file"] for n in news}:
             if stale.is_symlink() or not stale.resolve().is_relative_to(out): raise ValueError("Unsafe obsolete news path")
             stale.unlink()
-    put("NEWS.md", "# Новости Happiness\n\nОписание готовых изменений и подготовленных сборок. Наличие записи не означает, что её файлы уже открыты для скачивания.\n\n" + "\n\n".join(news_lines) + "\n")
+    put("NEWS.md", "# Новости Happiness\n\nИстория выпусков и заметки об обновлениях.\n\n" + "\n\n".join(news_lines) + "\n")
     public = dict(meta, distribution={"client": client, "plus": None}, news=[{k:v for k,v in n.items() if k != "body"} for n in news])
     put("data/current.json", json.dumps(public, ensure_ascii=False, indent=2) + "\n")
     base = "https://github.com/" + REPOSITORY
@@ -151,94 +147,57 @@ def render(root, out, fetch=False):
 
 Версия: **{client['tag']}**. [Изменения и контрольные суммы]({client['page']}). CEF и Flash для игры есть в обоих вариантах."""
     else:
-        downloads = "**Публичная загрузка пока не открыта.**\n\nПодготовленная сборка: **" + version + " Preview**. Здесь появятся установщик EXE, portable ZIP и контрольные суммы после публикации владельцем."
+        downloads = "**Публичная загрузка пока не открыта.**\n\nПодготовленная сборка: **" + version + "**."
     latest = "\n\n".join(news_lines[:3]); exe = meta["sizeComparison"]["clientExeBytes"] / 1048576; plus = meta["sizeComparison"]["plusExeBytes"] / 1048576; comparison_version = meta["sizeComparison"]["version"]
-    readme = f'''<div align="center">
-<img src="assets/hero.svg" width="100%" alt="DivineLabs Happiness - клиент MusicWars для Windows" />
-<br /><br />
-<a href="#скачать"><img src="https://img.shields.io/badge/CLIENT-Windows_x64-8B6CEF?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="Client для Windows" /></a>
-<a href="NEWS.md"><img src="https://img.shields.io/badge/НОВОСТИ-обновления-222238?style=for-the-badge" alt="Новости" /></a>
-<a href="{links['discord']}"><img src="https://img.shields.io/badge/DISCORD-DivineLabs-5865F2?style=for-the-badge&amp;logo=discord&amp;logoColor=white" alt="Discord DivineLabs" /></a>
-<a href="{links['author']}"><img src="https://img.shields.io/badge/TELEGRAM-автор-229ED9?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" alt="Автор в Telegram" /></a>
-</div>
+    readme = f'''<img src="assets/hero.svg" width="100%" alt="DivineLabs Happiness Client" />
 
-# DivineLabs Happiness
+# DivineLabs Happiness Client
 
-Клиент MusicWars для Windows. Доступен в виде установщика и portable-архива.
+Бесплатный клиент MusicWars для Windows. Вход через ВК, настройки графики, скриншоты и игровые метрики собраны в одном окне.
 
-**[Скачать](#скачать)** · **[Что нового](NEWS.md)** · **[Начало работы](docs/getting-started.md)** · **[Поддержка](#поддержка)**
+[Скачать](#скачать) · [Настройки](docs/settings.md) · [Что нового](NEWS.md) · [Проверки](docs/tests.md) · [Поддержка](#поддержка)
 
 ## Скачать
 
 {downloads}
 
-Предварительная версия. Полная игровая проверка ещё не завершена.
-
 ## Возможности
 
-- Адаптивное окно игры, полноэкранный режим и горячие клавиши.
-- Боковая панель по нажатию на перемещаемый логотип DivineLabs.
-- Четыре темы: Orbit, Signal, Paper и Control.
-- Скриншоты игры без элементов оболочки.
-- Сворачивание в системный трей.
-- Локальная запись технических показателей.
-- Открытие ссылок из писем внутри клиента.
+- **Игра.** Адаптивное окно, вход через ВК, настройка качества Flash и перезагрузка по горячей клавише.
+- **Скриншоты.** Вся программа, только игра или выбранная область. Действия можно вынести к логотипу и назначить на клавиши.
+- **Метрики.** Перемещаемая панель с нагрузкой CPU, памятью, каденцией Flash и доступной задержкой соединения.
+- **Обслуживание.** Журнал по сессиям, сообщения при сбоях и проверка обновлений в установленной версии.
 
-## Client и Plus
+Client рассчитан на ручную игру. Client+ развивается отдельно.
 
-| | Client | Plus |
-| --- | --- | --- |
-| Игровое окно, темы, ссылки и скриншоты | Есть | Есть |
-| Основное приложение | Самостоятельный клиент | Клиент с дополнительными игровыми модулями |
-| Основной EXE · {comparison_version} | {exe:.2f} МиБ | {plus:.2f} МиБ |
-| Публичный канал | {"Доступен" if client else "Подготавливается"} | После запуска подписок |
-
-Plus пока не опубликован. Подписки ещё не запущены.
-
-## Производительность
-
-Основной EXE подготовленной версии {version} занимает **{b['clientExeBytes']/1048576:.2f} МиБ**. Компоненты браузера входят в установщик и portable отдельно от EXE.
-
-Сравнительных замеров FPS, CPU и памяти пока нет. [Сведения о размерах и замерах](docs/performance.md).
-
-## Сейчас в проекте
+## Последние обновления
 
 {latest}
 
-[Все новости →](NEWS.md)
+[История версий](NEWS.md)
 
 ## Поддержка
 
-**[Discord DivineLabs]({links['discord']})** · **[Автор в Telegram]({links['author']})** · **[GitHub автора]({links['github']})**
+[Discord DivineLabs]({links['discord']}) · [Telegram автора]({links['author']}) · [Сообщить об ошибке]({base}/issues/new/choose)
 
-Нашли ошибку? [Откройте обращение]({base}/issues/new/choose): укажите версию, Windows и шаги повторения.
-
-## Лицензия и происхождение
-
-Happiness распространяется на [закрытых условиях](LICENSE). Разрешено личное использование официальной сборки и тестирование. Публикация, перепродажа и распространение собственного кода и сборок требуют разрешения правообладателя. [Краткое объяснение](docs/license.md).
-
-Этот репозиторий содержит страницу продукта, новости и материалы выпусков. Исходный код приложения здесь не публикуется.
-
-Независимый неофициальный проект. MusicWars и игровые материалы принадлежат их правообладателям.
+Независимый клиент. MusicWars и игровые материалы принадлежат их правообладателям. [Условия использования](LICENSE).
 '''
     put("README.md", readme)
     selected = re.match(r"^v?(\d+)\.(\d+)\.(\d+)", client["tag"] if client else version)
     bundled = bool(selected and tuple(map(int, selected.groups())) >= (0, 2, 9))
-    runtime_note = ("Компонент входа через ВК включён в установщик и portable; отдельно устанавливать WebView2 не нужно. При переходе на встроенный движок может потребоваться повторный вход." if bundled else "Для входа через ВК нужен установленный Microsoft Edge WebView2 Runtime. Вход в Client 0.2.8 проверен владельцем.")
+    runtime_note = ("Компонент входа через ВК включён в установщик и portable; отдельно устанавливать WebView2 не нужно. При переходе на встроенный движок может потребоваться повторный вход." if bundled else "Для входа через ВК нужен установленный Microsoft Edge WebView2 Runtime. ")
     if client and client.get("systemWebView2"):
         runtime_note = "Есть два варианта: со встроенным WebView2 и без него. Во втором для входа через ВК нужен установленный Microsoft Edge WebView2 Runtime. CEF и Flash входят в оба пакета. При смене режима может потребоваться повторный вход."
-    put("docs/getting-started.md", "# Начало работы\n\n" + ("Скачайте Client по кнопкам на главной странице или в Releases." if client else "Публичные файлы пока не опубликованы. Когда канал откроется, кнопки появятся на главной странице и в Releases.") + """
+    put("docs/getting-started.md", "# Начало работы\n\n" + ("Скачайте Client со страницы продукта или из раздела Releases." if client else "Публичные файлы пока не опубликованы. Когда канал откроется, кнопки появятся на главной странице и в Releases.") + """
 
 1. Выберите Client Setup.exe для установки или portable ZIP для распаковки.
-2. Обновляйте установленную копию в той же папке. Перед переносом portable сохраните всю папку Data.
-3. Для portable распакуйте архив целиком и запускайте DivineLabs.Happiness.exe из корня.
+2. Обновляйте Client 0.3 и новее из меню. При переходе со старых версий выберите отдельную папку.
+3. Для portable распакуйте архив целиком и запускайте DivineLabs_Happiness_Client.exe из корня.
 4. Настройки и профили находятся в Data. Установка и удаление используют фирменный мастер DivineLabs.
 
 """ + runtime_note + """ Звук выключен.
 
-По умолчанию удаление сохраняет данные. Полное удаление выбирается отдельно. Обновление и удаление 0.2.8 проверены на отдельных тестовых установках.
-
-Версия предварительная. При ошибке укажите версию приложения и шаги повторения в Issues или Discord.
+[Настройки](settings.md) · [История обновлений](../NEWS.md) · [Проверки](tests.md)
 """)
     put("docs/performance.md", f"""# Производительность и замеры
 
@@ -250,9 +209,9 @@ Happiness распространяется на [закрытых условия
 
 Разница связана с составом редакций. Это не сравнение одинаковых по функциям приложений и не доказательство снижения CPU, памяти или роста FPS. Общие CEF/Flash-компоненты остаются в поставке.
 
-В приложении есть запись технических показателей на 60 секунд. Она выключена по умолчанию; отчёт сохраняется локально в Data/Diagnostics/Performance и не отправляется автоматически.
+В разделе «Клиент → Метрики» можно включить панель с показателями памяти, CPU и Flash.
 
-Можно получить CPU, память и доступные интервалы Flash-кадров. События игровой логики не равны частоте фактического показа изображения. Показатель видимого FPS из этих событий не вычисляется.
+Метрика каденции Flash показывает частоту событий кадров. Видимый FPS измеряется отдельно.
 
 Сравнение с обычным браузером и результаты графических оптимизаций пока не опубликованы. Корректный отчёт должен содержать одинаковую сцену, размер окна, состояние кеша, прогрев и несколько повторов. До таких результатов проценты прироста не заявляются.
 """)

@@ -2,7 +2,9 @@
 
 # Happiness news
 
-Completed changes and prepared builds. A news entry does not mean its downloads have been published.
+Release notes and update history.
+
+- **2026-11-08 · 0.3.0** - [Happiness Client 0.3.0](news/en/2026-11-08-client-0.3.0.md)
 
 - **2026-11-07 · 0.1.1-rust** - [New menu and metrics in Rust Client 0.1.1](news/en/2026-11-07-rust-client-menu.md)
 

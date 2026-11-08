@@ -4,7 +4,7 @@ date: 2026-11-07
 version: 0.1.0-rust
 ---
 
-Первый portable-клиент Happiness на Rust. Владелец проверил вход через ВК, ручную игру, оформление и положение логотипа при изменении размера окна. Игровые CEF и нативный Flash сохранены, звук выключен.
+Первый portable-клиент Happiness на Rust. Игровые CEF и нативный Flash сохранены, звук выключен.
 
 **[Rust Client 0.1.0: файлы и контрольные суммы](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/rust-v0.1.0)**
 

@@ -1,82 +1,43 @@
 **Русский** · [English](README.en.md)
 
-<div align="center">
-<img src="assets/hero.svg" width="100%" alt="DivineLabs Happiness - клиент MusicWars для Windows" />
-<br /><br />
-<a href="#скачать"><img src="https://img.shields.io/badge/CLIENT-Windows_x64-8B6CEF?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="Client для Windows" /></a>
-<a href="NEWS.md"><img src="https://img.shields.io/badge/НОВОСТИ-обновления-222238?style=for-the-badge" alt="Новости" /></a>
-<a href="https://discord.gg/vF47ExMQpn"><img src="https://img.shields.io/badge/DISCORD-DivineLabs-5865F2?style=for-the-badge&amp;logo=discord&amp;logoColor=white" alt="Discord DivineLabs" /></a>
-<a href="https://t.me/ps1xo_on1ks"><img src="https://img.shields.io/badge/TELEGRAM-автор-229ED9?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" alt="Автор в Telegram" /></a>
-</div>
+<img src="assets/hero.svg" width="100%" alt="DivineLabs Happiness Client" />
 
-# DivineLabs Happiness
+# DivineLabs Happiness Client
 
-Клиент MusicWars для Windows. Доступен в виде установщика и portable-архива.
+Бесплатный клиент MusicWars для Windows. Вход через ВК, настройки графики, скриншоты и игровые метрики собраны в одном окне.
 
-**[Скачать](#скачать)** · **[Что нового](NEWS.md)** · **[Начало работы](docs/getting-started.md)** · **[Поддержка](#поддержка)**
+[Скачать](#скачать) · [Настройки](docs/settings.md) · [Что нового](NEWS.md) · [Проверки](docs/tests.md) · [Поддержка](#поддержка)
 
 ## Скачать
 
 | Вариант | Установщик | Portable | Вход через ВК |
 | --- | --- | --- | --- |
-| Со встроенным WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs.Happiness.Client.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs-Happiness-Client-portable.zip) | Компонент включён |
-| Без встроенного WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs-Happiness-Client-SystemWebView2-portable.zip) | Нужен системный WebView2 Runtime |
+| Со встроенным WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.Bundled.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.Bundled.portable.zip) | Компонент включён |
+| Без встроенного WebView2 | [EXE](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe) | [ZIP](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.SystemWebView2.portable.zip) | Нужен системный WebView2 Runtime |
 
-Версия: **v0.2.14**. [Изменения и контрольные суммы](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.14). CEF и Flash для игры есть в обоих вариантах.
-
-Предварительная версия. Полная игровая проверка ещё не завершена.
-
-## Rust Client (предварительная версия)
-
-Отдельный portable-клиент для ручной игры. [Возможности, ограничения и загрузки](news/2026-11-07-rust-client-menu.md). Delphi и его автообновления остаются в своём канале.
+Версия: **v0.3.0**. [Изменения и контрольные суммы](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.3.0). CEF и Flash для игры есть в обоих вариантах.
 
 ## Возможности
 
-- Адаптивное окно игры, полноэкранный режим и горячие клавиши.
-- Боковая панель по нажатию на перемещаемый логотип DivineLabs.
-- Четыре темы: Orbit, Signal, Paper и Control.
-- Скриншоты игры без элементов оболочки.
-- Сворачивание в системный трей.
-- Локальная запись технических показателей.
-- Открытие ссылок из писем внутри клиента.
+- **Игра.** Адаптивное окно, вход через ВК, настройка качества Flash и перезагрузка по горячей клавише.
+- **Скриншоты.** Вся программа, только игра или выбранная область. Действия можно вынести к логотипу и назначить на клавиши.
+- **Метрики.** Перемещаемая панель с нагрузкой CPU, памятью, каденцией Flash и доступной задержкой соединения.
+- **Обслуживание.** Журнал по сессиям, сообщения при сбоях и проверка обновлений в установленной версии.
 
-## Client и Plus
+Client рассчитан на ручную игру. Client+ развивается отдельно.
 
-| | Client | Plus |
-| --- | --- | --- |
-| Игровое окно, темы, ссылки и скриншоты | Есть | Есть |
-| Основное приложение | Самостоятельный клиент | Клиент с дополнительными игровыми модулями |
-| Основной EXE · 0.2.8 | 4.16 МиБ | 15.80 МиБ |
-| Публичный канал | Доступен | После запуска подписок |
+## Последние обновления
 
-Plus пока не опубликован. Подписки ещё не запущены.
-
-## Производительность
-
-Основной EXE подготовленной версии 0.2.14 занимает **3.67 МиБ**. Компоненты браузера входят в установщик и portable отдельно от EXE.
-
-Сравнительных замеров FPS, CPU и памяти пока нет. [Сведения о размерах и замерах](docs/performance.md).
-
-## Сейчас в проекте
+- **2026-11-08 · 0.3.0** - [Happiness Client 0.3.0](news/2026-11-08-client-0.3.0.md)
 
 - **2026-11-07 · 0.1.1-rust** - [Новое меню и метрики Rust Client 0.1.1](news/2026-11-07-rust-client-menu.md)
 
 - **2026-11-07 · 0.1.0-rust** - [Rust Client 0.1.0: вход через ВК и ручная игра](news/2026-11-07-rust-client.md)
 
-- **2026-11-05 · 0.2.14** - [Client 0.2.14: обновление приложения и восстановление после сбоев](news/2026-11-05-client-0.2.14.md)
-
-[Все новости →](NEWS.md)
+[История версий](NEWS.md)
 
 ## Поддержка
 
-**[Discord DivineLabs](https://discord.gg/vF47ExMQpn)** · **[Автор в Telegram](https://t.me/ps1xo_on1ks)** · **[GitHub автора](https://github.com/TheDivineLabs)**
+[Discord DivineLabs](https://discord.gg/vF47ExMQpn) · [Telegram автора](https://t.me/ps1xo_on1ks) · [Сообщить об ошибке](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/issues/new/choose)
 
-Нашли ошибку? [Откройте обращение](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/issues/new/choose): укажите версию, Windows и шаги повторения.
-
-## Лицензия и происхождение
-
-Happiness распространяется на [закрытых условиях](LICENSE). Разрешено личное использование официальной сборки и тестирование. Публикация, перепродажа и распространение собственного кода и сборок требуют разрешения правообладателя. [Краткое объяснение](docs/license.md).
-
-Этот репозиторий содержит страницу продукта, новости и материалы выпусков. Исходный код приложения здесь не публикуется.
-
-Независимый неофициальный проект. MusicWars и игровые материалы принадлежат их правообладателям.
+Независимый клиент. MusicWars и игровые материалы принадлежат их правообладателям. [Условия использования](LICENSE).

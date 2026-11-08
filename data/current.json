@@ -8,13 +8,13 @@
     "discord": "https://discord.gg/vF47ExMQpn"
   },
   "build": {
-    "version": "0.2.14",
-    "date": "2026-11-05",
-    "channel": "preview",
-    "clientExeBytes": 3843584,
+    "version": "0.3.0",
+    "date": "2026-11-08",
+    "channel": "stable",
+    "clientExeBytes": 1951232,
     "plusExeBytes": 16643584,
-    "installerBytes": 352312113,
-    "portableBytes": 349598249
+    "installerBytes": 361054760,
+    "portableBytes": 390465610
   },
   "plus": {
     "status": "planned",
@@ -31,39 +31,45 @@
   },
   "distribution": {
     "client": {
-      "tag": "v0.2.14",
-      "page": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.2.14",
+      "tag": "v0.3.0",
+      "page": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/v0.3.0",
       "preview": false,
       "installer": {
-        "name": "DivineLabs.Happiness.Client.Setup.exe",
-        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs.Happiness.Client.Setup.exe",
-        "bytes": 352312113,
-        "digest": "sha256:cfb1a45c731865dd2fe186239c2a9d1d24111e91144ca8264864416a11ea9c15"
+        "name": "DivineLabs.Happiness.Client.Bundled.Setup.exe",
+        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.Bundled.Setup.exe",
+        "bytes": 361054760,
+        "digest": "sha256:cc5c409519831394ef72acaf12e632c002d70354eb0c4c7244dfbbc0974d0412"
       },
       "portable": {
-        "name": "DivineLabs-Happiness-Client-portable.zip",
-        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs-Happiness-Client-portable.zip",
-        "bytes": 349598249,
-        "digest": "sha256:07a04d3dd45ec7242f4c2e3444a0bae86c41bd1d135997c1a72a9a71c86ffbf4"
+        "name": "DivineLabs.Happiness.Client.Bundled.portable.zip",
+        "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.Bundled.portable.zip",
+        "bytes": 390465610,
+        "digest": "sha256:6bc30435de282712a54920b8c45516027c694fbc641897a1d43c1ca2684c1441"
       },
       "systemWebView2": {
         "installer": {
           "name": "DivineLabs.Happiness.Client.SystemWebView2.Setup.exe",
-          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe",
-          "bytes": 76080411,
-          "digest": "sha256:b63fd43733bf84678c60b1d4018ff1210b60bab3c0b6cb58f317efa6d3b1be7e"
+          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.SystemWebView2.Setup.exe",
+          "bytes": 84692309,
+          "digest": "sha256:a439e0a5c1fd59a2a236d1c3be5c5d8f805531e348858bfbf9acb8b0bb876bbb"
         },
         "portable": {
-          "name": "DivineLabs-Happiness-Client-SystemWebView2-portable.zip",
-          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.2.14/DivineLabs-Happiness-Client-SystemWebView2-portable.zip",
-          "bytes": 73251095,
-          "digest": "sha256:6e87ab947409f38983d28e507194159065d99e83cf649ae99dd1cbdce918f6f6"
+          "name": "DivineLabs.Happiness.Client.SystemWebView2.portable.zip",
+          "url": "https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/download/v0.3.0/DivineLabs.Happiness.Client.SystemWebView2.portable.zip",
+          "bytes": 46985452,
+          "digest": "sha256:d24d4e47e43ba4b8e348abd2309fe2904d59008a9d80f8d158c2e416efde87df"
         }
       }
     },
     "plus": null
   },
   "news": [
+    {
+      "title": "Happiness Client 0.3.0",
+      "date": "2026-11-08",
+      "version": "0.3.0",
+      "file": "2026-11-08-client-0.3.0.md"
+    },
     {
       "title": "Новое меню и метрики Rust Client 0.1.1",
       "date": "2026-11-07",

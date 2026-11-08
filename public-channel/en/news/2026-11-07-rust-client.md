@@ -2,10 +2,10 @@
 title: Rust Client 0.1.0: VK sign-in and manual play
 date: 2026-11-07
 version: 0.1.0-rust
-source_sha256: 07eb54f83e0994cb257360ec0055a44f3aa0cb98af331884ac4084c1af5ae816
+source_sha256: 3a1dacfa8434e838a9e09c364bc0b6f30ea0cd327faa8a634aaace19e3151782
 ---
 
-The first portable Happiness client written in Rust. The owner verified VK sign-in, manual play, appearance and logo positioning when resizing the window. The existing CEF and native Flash runtimes remain in use; sound stays muted.
+The first portable Happiness client written in Rust. The existing CEF and native Flash runtimes remain in use; sound stays muted.
 
 **[Rust Client 0.1.0: downloads and checksums](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/rust-v0.1.0)**
 

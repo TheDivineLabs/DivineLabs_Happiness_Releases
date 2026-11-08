@@ -4,7 +4,7 @@
 
 2026-11-07 · 0.1.0-rust
 
-The first portable Happiness client written in Rust. The owner verified VK sign-in, manual play, appearance and logo positioning when resizing the window. The existing CEF and native Flash runtimes remain in use; sound stays muted.
+The first portable Happiness client written in Rust. The existing CEF and native Flash runtimes remain in use; sound stays muted.
 
 **[Rust Client 0.1.0: downloads and checksums](https://github.com/TheDivineLabs/DivineLabs_Happiness_Releases/releases/tag/rust-v0.1.0)**
 

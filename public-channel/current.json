@@ -8,13 +8,13 @@
     "discord": "https://discord.gg/vF47ExMQpn"
   },
   "build": {
-    "version": "0.2.14",
-    "date": "2026-11-05",
-    "channel": "preview",
-    "clientExeBytes": 3843584,
+    "version": "0.3.0",
+    "date": "2026-11-08",
+    "channel": "stable",
+    "clientExeBytes": 1951232,
     "plusExeBytes": 16643584,
-    "installerBytes": 352312113,
-    "portableBytes": 349598249
+    "installerBytes": 361054760,
+    "portableBytes": 390465610
   },
   "plus": {
     "status": "planned",
